@@ -1,0 +1,1 @@
+"./tm4c1294ncpdt_startup_ccs_gcc.o" "./os_list/main.o" "./os_list/os.o" "./os_list/port.o" -Wl,-T"../tm4c1294ncpdt.lds" -Wl,--start-group "/home/albino/ti/tivaware/driverlib/gcc/libdriver.a" -Wl,--end-group 
