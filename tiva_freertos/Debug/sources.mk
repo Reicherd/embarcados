@@ -115,4 +115,5 @@ SUBDIRS := \
 FreeRTOS \
 FreeRTOS/portable/GCC/ARM_CM4F \
 FreeRTOS/portable/MemMang \
+FreeRTOS-Plus-CLI \
 

@@ -19,6 +19,7 @@ ORDERED_OBJS += \
 "./FreeRTOS/timers.o" \
 "./FreeRTOS/portable/GCC/ARM_CM4F/port.o" \
 "./FreeRTOS/portable/MemMang/heap_4.o" \
+"./FreeRTOS-Plus-CLI/FreeRTOS_CLI.o" \
 -Wl,-T"../tm4c1294ncpdt.lds" \
 $(GEN_CMDS__FLAG) \
 -Wl,--start-group \
@@ -37,10 +38,12 @@ RMDIR := rm -rf
 -include FreeRTOS/subdir_vars.mk
 -include FreeRTOS/portable/GCC/ARM_CM4F/subdir_vars.mk
 -include FreeRTOS/portable/MemMang/subdir_vars.mk
+-include FreeRTOS-Plus-CLI/subdir_vars.mk
 -include subdir_rules.mk
 -include FreeRTOS/subdir_rules.mk
 -include FreeRTOS/portable/GCC/ARM_CM4F/subdir_rules.mk
 -include FreeRTOS/portable/MemMang/subdir_rules.mk
+-include FreeRTOS-Plus-CLI/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -157,7 +160,7 @@ all: $(OBJS) $(LDS_SRCS) $(GEN_CMDS)
 tiva_freertos.out: $(OBJS) $(LDS_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: GNU Linker'
-	"/home/albino/ti/ccs1020/ccs/tools/compiler/gcc-arm-none-eabi-7-2017-q4-major/bin/arm-none-eabi-gcc-7.2.1" -DPART_TM4C1294NCPDT -Og -ffunction-sections -fdata-sections -g -gdwarf-3 -gstrict-dwarf -Wall -specs="nosys.specs" -march=armv7e-m -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -Wl,-Map,"tiva_freertos.map" -o"tiva_freertos.out" $(ORDERED_OBJS)
+	"/home/albino/ti/ccs1020/ccs/tools/compiler/gcc-arm-none-eabi-7-2017-q4-major/bin/arm-none-eabi-gcc-7.2.1" -DPART_TM4C1294NCPDT -Dgcc -DTARGET_IS_TM4C129_RA1 -Og -ffunction-sections -fdata-sections -g -gdwarf-3 -gstrict-dwarf -Wall -specs="nosys.specs" -march=armv7e-m -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -Wl,-Map,"tiva_freertos.map" -o"tiva_freertos.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
@@ -171,8 +174,8 @@ tiva_freertos.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.o" "tm4c1294ncpdt_startup_ccs_gcc.o" "FreeRTOS/croutine.o" "FreeRTOS/event_groups.o" "FreeRTOS/list.o" "FreeRTOS/queue.o" "FreeRTOS/stream_buffer.o" "FreeRTOS/tasks.o" "FreeRTOS/timers.o" "FreeRTOS/portable/GCC/ARM_CM4F/port.o" "FreeRTOS/portable/MemMang/heap_4.o" 
-	-$(RM) "main.d" "tm4c1294ncpdt_startup_ccs_gcc.d" "FreeRTOS/croutine.d" "FreeRTOS/event_groups.d" "FreeRTOS/list.d" "FreeRTOS/queue.d" "FreeRTOS/stream_buffer.d" "FreeRTOS/tasks.d" "FreeRTOS/timers.d" "FreeRTOS/portable/GCC/ARM_CM4F/port.d" "FreeRTOS/portable/MemMang/heap_4.d" 
+	-$(RM) "main.o" "tm4c1294ncpdt_startup_ccs_gcc.o" "FreeRTOS/croutine.o" "FreeRTOS/event_groups.o" "FreeRTOS/list.o" "FreeRTOS/queue.o" "FreeRTOS/stream_buffer.o" "FreeRTOS/tasks.o" "FreeRTOS/timers.o" "FreeRTOS/portable/GCC/ARM_CM4F/port.o" "FreeRTOS/portable/MemMang/heap_4.o" "FreeRTOS-Plus-CLI/FreeRTOS_CLI.o" 
+	-$(RM) "main.d" "tm4c1294ncpdt_startup_ccs_gcc.d" "FreeRTOS/croutine.d" "FreeRTOS/event_groups.d" "FreeRTOS/list.d" "FreeRTOS/queue.d" "FreeRTOS/stream_buffer.d" "FreeRTOS/tasks.d" "FreeRTOS/timers.d" "FreeRTOS/portable/GCC/ARM_CM4F/port.d" "FreeRTOS/portable/MemMang/heap_4.d" "FreeRTOS-Plus-CLI/FreeRTOS_CLI.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
